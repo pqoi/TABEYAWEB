@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabeya Home</title>
+    <link rel="stylesheet" href="CSS/Home.css"> 
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="Photo/Tabeya Name.png" alt="Tabeya Logo">
+        </div>
+        <nav>
+            <a href="index.html" class="active">HOME</a>
+            <a href="Menu.html">MENU</a>
+            <a href="#" id="cater-reservation-link">CATER RESERVATION</a>
+            <a href="GALLERY.html">GALLERY</a>
+            <a href="Review.php">TESTIMONY</a>
+            <a href="About.html">ABOUT</a>
+            <a href="Login.html" id="account-link">PROFILE</a> 
+            <div class="cart-icon" id="view-cart-btn">
+                🛒 <span class="cart-count" id="cart-item-count">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="logo-container">
+                <img src="Photo/Tabeya Name1.png" alt="Tabeya Logo">
+            </div>
+        </section>
+
+        <section class="offerings-section">
+            <div class="h1-container">
+                <h1>WHAT WE OFFER</h1>
+            </div>
+            <div class="offerings">
+                <div class="item">
+                    <img src="Photo/javanok.jpeg" alt="Rice Meals">
+                    <div>
+                        <h2>RICE MEALS</h2>
+                        <p>A hearty and satisfying dish, our Rice Meal is a perfect combination of perfectly cooked rice served with your choice of flavorful meat, fresh vegetables, and delicious sauces. Whether you prefer chicken, beef, or seafood, our rice meals are designed to keep you full and content. Ideal for lunch or dinner, it’s a classic Filipino favorite that brings comfort in every bite.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="Photo/gegs.jpeg" alt="Platters">
+                    <div>
+                        <h2>PLATTER</h2>
+                        <p>Our Platter is a generous serving of various savory delights, perfect for sharing with friends and family. Featuring a variety of grilled meats, crispy appetizers, and flavorful dips, this platter brings together the best of Filipino flavors in one delicious spread. Ideal for parties or gatherings, it’s the perfect way to enjoy a variety of dishes without the hassle.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="Photo/halo.jpeg" alt="Desserts">
+                    <div>
+                        <h2>DESSERTS</h2>
+                        <p>Indulge your sweet tooth with our selection of irresistible Filipino desserts. From the creamy goodness of Leche Flan to the tropical flavors of Halo-Halo, each dessert is made with the finest ingredients to give you a refreshing and delightful end to your meal. Perfect for anyone who loves a sweet treat, our desserts bring the perfect balance of richness and lightness to satisfy your cravings.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="Photo/spagspag.jpeg" alt="Spaghetti">
+                    <div>
+                        <h2>SPAGHETTI</h2>
+                        <p>Our Spaghetti is a deliciously rich, Filipino-style pasta dish that combines the savory sweetness of tomato sauce, seasoned with special herbs and spices, and topped with perfectly cooked meatballs or savory hotdogs. A family favorite, this dish is sure to make every meal feel like a celebration. Perfect for both kids and adults, it’s a crowd-pleaser with every bite!</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="Photo/333.jpeg" alt="Bilao">
+                    <div>
+                        <h2>BILAO</h2>
+                        <p>A Bilao is a traditional Filipino feast served in a large round tray, perfect for sharing with family and friends. It features an assortment of dishes including rice, grilled meats, seafood, vegetables, and dipping sauces, all arranged beautifully for a vibrant and festive meal. Whether you’re celebrating a special occasion or enjoying a casual meal with loved ones, our Bilao is designed to bring people together over a delightful spread of classic Filipino flavors.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="info-section">
+            <h3 class="quote">KEEPING TASTE TRADITION ALIVE SINCE 2003</h3>
+            <div class="quote-with-border">
+                <h3>OPEN DAILY</h3>
+                <p>8AM - 8PM</p>
+            </div>
+            <h3 class="quote3">Poblacion 2, Vinzons Avenue, Vinzons, Camarines Norte</h3>
+        </section>
+    </main>
+
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items-list">
+                </div>
+            <div class="cart-summary">
+                <strong>Total: ₱<span id="cart-total">0.00</span></strong>
+            </div>
+            <button id="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+    <footer>
+        <div class="contact-section">
+            <div class="container">
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <p>Have any questions? We'd love to hear from you.</p>
+                    <div class="info-group">
+                        <div class="info-item visit-us">
+                            <img src="Photo/VisitUs.png" alt="Location Icon" class="icon">
+                            <div>
+                                <strong>Visit us</strong>
+                                <p>Poblacion 2, Vinzons Avenue,<br>Vinzons, Camarines Norte</p>
+                            </div>
+                        </div>
+                        <div class="info-item call-us">
+                            <img src="Photo/Selpon.png" alt="Phone Icon" class="icon">
+                            <div>
+                                <strong>Call us</strong>
+                                <p>09380839641</p>
+                            </div>
+                        </div>
+                        <div class="info-item connect-us">
+                            <img src="Photo/Facebook.png" alt="Facebook Icon" class="icon">
+                            <div>
+                                <strong>Connect to us</strong>
+                                <a href="https://www.facebook.com/profile.php?id=100063540027038" target="_blank" class="no-underline">Tabeya, VCN</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ====================================================================
+        // === CORE UTILITIES & AUTHENTICATION (Required for the header and cart to function securely) ===
+        // ====================================================================
+        const LOGIN_PAGE = 'Login.html';
+        const CATER_RESERVATION_PAGE = 'CaterReservation.html';
+
+        function checkUserLoginStatus() {
+            return localStorage.getItem('currentUser') !== null;
+        }
+
+        function checkLoginAndProceed(redirectTarget) {
+            if (!checkUserLoginStatus()) { 
+                alert("You must log in to perform this action.");
+                if (redirectTarget) {
+                    localStorage.setItem('redirectAfterLogin', redirectTarget);
+                }
+                window.location.href = LOGIN_PAGE;
+                return false;
+            }
+            return true;
+        }
+
+        function updateAccountLink() {
+            const accountLink = document.getElementById('account-link');
+            if (!accountLink) return;
+
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            accountLink.onclick = null; 
+
+            if (user) {
+                // LOGGED IN STATE
+                accountLink.textContent = user.name.split(' ')[0].toUpperCase();
+                accountLink.href = '#'; 
+                
+                accountLink.onclick = (e) => {
+                    e.preventDefault();
+                    if (confirm(`Are you sure you want to log out, ${user.name.split(' ')[0]}?`)) {
+                        localStorage.removeItem('currentUser');
+                        localStorage.removeItem('redirectAfterLogin'); 
+                        window.location.reload(); 
+                    }
+                };
+            } else {
+                // LOGGED OUT STATE
+                accountLink.textContent = 'PROFILE';
+                accountLink.href = LOGIN_PAGE;
+            }
+        }
+        
+        // --- CATER RESERVATION Link Protection ---
+        document.getElementById('cater-reservation-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            if (checkLoginAndProceed(CATER_RESERVATION_PAGE)) {
+                window.location.href = CATER_RESERVATION_PAGE;
+            }
+        });
+
+
+        // ====================================================================
+        // === CART MANAGEMENT LOGIC (Copied from Menu.html) ===
+        // ====================================================================
+        const cartModal = document.getElementById('cart-modal');
+        const viewCartBtn = document.getElementById('view-cart-btn');
+        const closeBtn = document.getElementsByClassName('close-btn')[0];
+        const cartCountElement = document.getElementById('cart-item-count');
+        const cartItemsList = document.getElementById('cart-items-list'); // Renamed to match HTML
+        const cartTotalElement = document.getElementById('cart-total');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        
+        let cart = JSON.parse(localStorage.getItem('tabeyaCart')) || [];
+
+        function updateCartDisplay() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            if (cartCountElement) {
+                cartCountElement.textContent = count;
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('tabeyaCart', JSON.stringify(cart));
+            updateCartDisplay();
+        }
+        
+        // Global function for buttons inside the modal to work
+        window.changeQuantity = function(itemId, delta) {
+            if (!checkUserLoginStatus()) { return; } // Security Check
+
+            const cartItem = cart.find(item => item.id === itemId);
+            if (!cartItem) return;
+
+            cartItem.quantity += delta;
+
+            if (cartItem.quantity <= 0) {
+                cart = cart.filter(item => item.id !== itemId);
+            }
+
+            saveCart();
+            renderCartModal(); 
+        }
+
+        function renderCartModal() {
+            let cartHtml = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<p style="text-align: center; color: #555;">Your cart is empty.</p>';
+                cartTotalElement.textContent = '0.00';
+                checkoutBtn.disabled = true;
+                return;
+            }
+            
+            checkoutBtn.disabled = false;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                // NOTE: 'item.image' is required but this page doesn't define menuData, 
+                // so the image might break if the item was added on the Menu page.
+                cartHtml += `
+                    <div class="cart-item">
+                        <img src="${item.image || 'Photo/default.jpg'}" alt="${item.name}" class="cart-item-image" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                        <div class="cart-item-info">
+                            <span class="cart-item-name">${item.name}</span>
+                            <span class="cart-item-price">@ ₱${item.price.toFixed(2)}</span>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button onclick="changeQuantity('${item.id}', -1)">-</button>
+                            <span class="cart-item-qty">${item.quantity}</span>
+                            <button onclick="changeQuantity('${item.id}', 1)">+</button>
+                        </div>
+                        <span class="cart-item-subtotal">₱${itemTotal.toFixed(2)}</span>
+                    </div>
+                `;
+            });
+
+            cartItemsList.innerHTML = cartHtml;
+            cartTotalElement.textContent = total.toFixed(2);
+        }
+
+        // --- Attach Modal Event Listeners ---
+        function attachCartModalListeners() {
+            if (viewCartBtn) {
+                viewCartBtn.onclick = function() {
+                    if (checkLoginAndProceed('index.html')) { 
+                        renderCartModal();
+                        cartModal.style.display = "block";
+                    }
+                }
+            }
+
+            if (closeBtn) {
+                closeBtn.onclick = function() {
+                    cartModal.style.display = "none";
+                }
+            }
+
+            window.onclick = function(event) {
+                if (event.target == cartModal) {
+                    cartModal.style.display = "none";
+                }
+            }
+
+            if (checkoutBtn) {
+                checkoutBtn.onclick = function() {
+                    if (!checkLoginAndProceed('index.html')) {
+                        return;
+                    }
+
+                    if (cart.length > 0) {
+                        alert("Proceeding to checkout! (Redirect to Checkout.html)");
+                        cartModal.style.display = "none";
+                        // TODO: window.location.href = 'Checkout.html';
+                    } else {
+                        alert("Your cart is empty!");
+                    }
+                }
+            }
+        }
+        
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartDisplay(); 
+            updateAccountLink(); 
+            attachCartModalListeners();
+        });
+    </script>
+</body>
+</html>

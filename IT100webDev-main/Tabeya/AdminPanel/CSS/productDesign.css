@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+h1 {
+    text-align: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+table th {
+    background-color: #333;
+    color: white;
+}
+.header-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+}
+
+#add-product-btn {
+    margin: 0;
+    width: auto;
+    padding: 10px 15px;
+    background-color: #d3cbcb;
+}
+#add-product-btn:hover {
+    background-color: #da0f0f;
+}
+#add-product-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(209, 30, 30, 0.918);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close-modal:hover {
+    color: black;
+}
+form div {
+    margin-bottom: 15px;
+}
+form label {
+    display: block;
+    font-weight: bold;
+}
+form input, form textarea, form select, form button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+form button {
+    background-color: #c4301d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 12px 20px;
+}
+form button:hover {
+    background-color: #0056b3;
+}
+.delete-btn {
+    color: red;
+    text-decoration: none;
+    padding: 12px 20px;
+    display: inline-block;
+}
+.delete-btn:hover {
+    text-decoration: underline;
+}
+.edit-btn {
+    color: blue;
+    text-decoration: none;
+    margin-right: 10px;
+    padding: 12px 20px;
+    display: inline-block;
+}
+.edit-btn:hover {
+    text-decoration: underline;
+}

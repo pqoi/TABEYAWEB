@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="CSS/About.css">
+</head>
+<body>
+    <header>
+        <div class="Name">
+            <img src="Photo/Tabeya Name.png" alt="Tabeya logo">
+        </div>
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="Menu.html">MENU</a>
+            <a href="CaterReservation.html" id="cater-reservation-link">CATER RESERVATION</a>
+            <a href="GALLERY.html">GALLERY</a>
+            <a href="Review.php">TESTIMONY</a>
+            <a href="About.html" class="active">ABOUT</a>
+            <a href="Login.html" id="account-link">PROFILE</a>
+            <div class="cart-icon" id="view-cart-btn">
+                🛒 <span class="cart-count" id="cart-item-count">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <h1>ABOUT US</h1>
+    
+
+    <div class="about-container">
+        <div class="text-box">
+            <p>
+                <strong>Reichan Tabeya</strong> is a local food store located in Vinzons, Camarines Norte, dedicated to serving authentic Filipino dishes that bring the comforting taste of home to every customer. Inspired by a love for Filipino cuisine and a passion for sharing it with the community, our journey began with the simple goal of providing fresh, delicious meals at an affordable price.
+            </p>
+        </div>
+        <div class="image-box">
+            <a href="https://maps.app.goo.gl/YourActualLocationLink" target="_blank" title="View location on Google Maps">
+            <img src="Photo/pic.jpg" alt="Restaurant Location">
+            </a>
+        </div>
+    </div>
+    <div class="box">
+        <p>
+            At Reichan Tabeya, we take pride in our signature dishes, crafted with care and rooted in tradition. From well-loved classics to unique local favorites, our menu reflects the rich culinary heritage of the Philippines. Each dish is prepared with quality ingredients and a commitment to delivering flavors that feel familiar and satisfying.
+        </p>
+    </div>
+
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <p id="empty-cart-message" style="text-align: center; color: #888; margin-top: 20px;">Your cart is empty.</p>
+            </div>
+            <div class="cart-summary">
+                <p>Total: <span id="cart-total">₱0.00</span></p>
+            </div>
+            <button id="checkout-btn" disabled>Proceed to Checkout</button>
+        </div>
+    </div>
+    <footer>
+        <div class="contact-section">
+            <div class="container">
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <p>Have any questions? We'd love to hear from you.</p>
+                    <div class="info-group">
+                        <div class="info-item visit-us">
+                            <img src="Photo/VisitUs.png" alt="Location Icon" class="icon">
+                            <div>
+                                <strong>Visit us</strong>
+                                <p>Poblacion 2, Vinzons Avenue,<br>Vinzons, Camarines Norte</p>
+                            </div>
+                        </div>
+                        <div class="info-item call-us">
+                            <img src="Photo/Selpon.png" alt="Phone Icon" class="icon">
+                            <div>
+                                <strong>Call us</strong>
+                                <p>09380839641</p>
+                            </div>
+                        </div>
+                        <div class="info-item connect-us">
+                            <img src="Photo/Facebook.png" alt="Facebook Icon" class="icon">
+                            <div>
+                                <strong>Connect to us</strong>
+                                <a href="https://www.facebook.com/profile.php?id=100063540027038" target="_blank" class="no-underline">Tabeya, VCN</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+    // ====================================================================
+    // === CORE LOGIN/SECURITY FUNCTIONS ===
+    // ====================================================================
+    const LOGIN_PAGE = 'Login.html';
+    const CATER_RESERVATION_PAGE = 'CaterReservation.html'; 
+    const CURRENT_PAGE = 'About.html';
+
+    /**
+     * Checks if the user is logged in.
+     * @returns {object|null} The user object if logged in, null otherwise.
+     */
+    function getCurrentUser() {
+        try {
+            // Retrieve and parse user data from localStorage
+            return JSON.parse(localStorage.getItem('currentUser'));
+        } catch (e) {
+            console.error("Error parsing user data from localStorage:", e);
+            return null;
+        }
+    }
+
+    /**
+     * Updates the PROFILE and CATER RESERVATION links based on login status.
+     */
+    function updateHeaderLinks() {
+        const accountLink = document.getElementById('account-link');
+        const caterLink = document.getElementById('cater-reservation-link');
+        const user = getCurrentUser();
+
+        // 1. Update PROFILE Link (Login/Logout State)
+        if (accountLink) {
+            accountLink.onclick = null; // Reset previous handler
+            if (user) {
+                // LOGGED IN STATE: Show name, allow logout
+                accountLink.textContent = user.name.split(' ')[0].toUpperCase();
+                accountLink.href = '#'; 
+                
+                accountLink.onclick = (e) => {
+                    e.preventDefault();
+                    if (confirm(`Are you sure you want to log out, ${user.name.split(' ')[0]}?`)) {
+                        localStorage.removeItem('currentUser');
+                        localStorage.removeItem('tabeyaCart');
+                        window.location.href = 'index.html'; // Redirect to home page after logout
+                    }
+                };
+            } else {
+                // LOGGED OUT STATE: Show PROFILE, links to login page
+                accountLink.textContent = 'PROFILE';
+                accountLink.href = LOGIN_PAGE;
+            }
+        }
+        
+        // 2. Secure CATER RESERVATION Link
+        if (caterLink) {
+            caterLink.onclick = null;
+            if (!user) {
+                caterLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert("You must log in to access the Cater Reservation page.");
+                    // Store the current page to redirect back after successful login
+                    localStorage.setItem('redirectAfterLogin', CATER_RESERVATION_PAGE);
+                    window.location.href = LOGIN_PAGE;
+                });
+            } else {
+                // If logged in, the link works normally
+                caterLink.href = CATER_RESERVATION_PAGE;
+            }
+        }
+    }
+
+    // ====================================================================
+    // === CART MANAGEMENT LOGIC (Secured) ===
+    // ====================================================================
+    const cartModal = document.getElementById('cart-modal');
+    const viewCartBtn = document.getElementById('view-cart-btn');
+    // Using a more specific selector for the cart modal close button
+    const closeBtn = document.querySelector('#cart-modal .close-btn'); 
+    const cartCountElement = document.getElementById('cart-item-count');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalElement = document.getElementById('cart-total');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    
+    let cart = JSON.parse(localStorage.getItem('tabeyaCart')) || [];
+
+    function saveCart() {
+        localStorage.setItem('tabeyaCart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountElement.textContent = totalItems;
+    }
+
+    function updateCartTotal() {
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartTotalElement.textContent = `₱${total.toFixed(2)}`;
+        // Disable checkout if cart is empty OR user is not logged in
+        checkoutBtn.disabled = cart.length === 0 || !getCurrentUser(); 
+    }
+
+    function renderCart() {
+        cartItemsContainer.innerHTML = '';
+        if (cart.length === 0) {
+            // Check for the specific empty cart message element
+            cartItemsContainer.innerHTML = '<p id="empty-cart-message" style="text-align: center; color: #888; margin-top: 20px;">Your cart is empty.</p>';
+        } else {
+            cart.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('cart-item');
+                // Display the total price for the item (price * quantity)
+                itemDiv.innerHTML = `
+                    <div class="item-details">
+                        <span class="item-name">${item.name}</span>
+                        <span class="item-price">₱${(item.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                    <div class="item-controls">
+                        <button class="qty-btn" data-index="${index}" data-action="decrease">-</button>
+                        <span class="item-quantity">${item.quantity}</span>
+                        <button class="qty-btn" data-index="${index}" data-action="increase">+</button>
+                        <button class="remove-btn" data-index="${index}">Remove</button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemDiv);
+            });
+        }
+        updateCartTotal();
+        saveCart();
+    }
+
+    // --- Event Handlers (Secured) ---
+
+    // Open Modal - SECURED
+    viewCartBtn.addEventListener('click', () => {
+        if (!getCurrentUser()) {
+             alert("You must log in to view your cart.");
+             // Store current page to redirect after login
+             localStorage.setItem('redirectAfterLogin', CURRENT_PAGE);
+             window.location.href = LOGIN_PAGE;
+             return;
+        }
+        renderCart(); 
+        cartModal.style.display = 'block';
+    });
+
+    // Close Modal (X button)
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
+    }
+
+    // Close Modal (Click outside)
+    window.addEventListener('click', (event) => {
+        if (event.target === cartModal) {
+            cartModal.style.display = 'none';
+        }
+    });
+
+    // Checkout Button Handler - SECURED
+    checkoutBtn.addEventListener('click', () => {
+        if (!getCurrentUser()) {
+            alert("You must log in to proceed to checkout.");
+            localStorage.setItem('redirectAfterLogin', CURRENT_PAGE);
+            window.location.href = LOGIN_PAGE;
+            return;
+        }
+        if (cart.length > 0) {
+            alert("Redirecting to checkout page...");
+            // **TODO:** window.location.href = 'Checkout.html'; 
+        }
+    });
+
+    // Quantity Control Handler - Secured
+    cartItemsContainer.addEventListener('click', (e) => {
+        const target = e.target;
+        const index = parseInt(target.getAttribute('data-index'));
+
+        // Only allow changes if the user is logged in
+        if (!isNaN(index) && getCurrentUser()) {
+            const item = cart[index];
+            
+            if (target.classList.contains('qty-btn')) {
+                const action = target.getAttribute('data-action');
+                if (action === 'increase') {
+                    item.quantity += 1;
+                } else if (action === 'decrease' && item.quantity > 1) {
+                    item.quantity -= 1;
+                } else if (action === 'decrease' && item.quantity === 1) {
+                    // Remove item if quantity goes to zero
+                    cart.splice(index, 1);
+                }
+                renderCart();
+            } else if (target.classList.contains('remove-btn')) {
+                cart.splice(index, 1);
+                renderCart();
+            }
+        }
+    });
+
+    // Add to Cart function is retained but won't be used on this page (About.html)
+    // It's here primarily for consistency, though it should be triggered from Menu.html
+    function addToCart(itemDetails) {
+        const existingItem = cart.find(item => item.id === itemDetails.id);
+
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({ ...itemDetails, quantity: 1 });
+        }
+        renderCart();
+        console.log(`${itemDetails.name} added to cart! Total items: ${cartCountElement.textContent}`);
+    }
+
+
+    // ====================================================================
+    // === INITIALIZATION ===
+    // ====================================================================
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCartCount();
+        updateHeaderLinks();
+    });
+    </script>
+</body>
+</html>

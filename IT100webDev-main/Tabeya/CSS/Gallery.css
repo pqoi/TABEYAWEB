@@ -1,0 +1,266 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-image: url('../Photo/Background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(188, 24, 35, 0.8);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+header .logo img {
+    max-width: 120px;
+    height: auto;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav a:hover, nav a:active {
+    color: yellow;
+}
+
+nav a.active {
+    color: yellow;
+}
+
+/* Gallery Styling */
+.gallery {
+    padding: 20px;
+    flex: 1;
+}
+
+.gallery h1 {
+    color: yellow;
+    font-size: 6.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Arial Black', sans-serif;
+}
+
+.picpic {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.picpic-item {
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.picpic img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+/*Footer Styling*/
+.contact-section {
+    background-color: rgba(188, 24, 35, 0.9);
+    padding: 5px;
+    height: auto; 
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contact-info {
+    max-width: 100%;
+    text-align: center;
+    color: yellow;
+}
+
+.contact-info h2 {
+    font-size: 1.5em;
+    color: yellow;
+}
+
+.contact-info p {
+    font-size: 1em;
+    color: rgb(255, 255, 255);
+}
+
+.info-group {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+    flex-wrap: nowrap; 
+    gap: 1px; 
+}
+
+.info-item.visit-us {
+    margin-right: 130px; 
+}
+
+.info-item.connect-us {
+    margin-left: 130px; 
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin: 1px;
+    text-align: left;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.no-underline {
+    color: white;
+    text-decoration: none;
+}
+
+.no-underline:hover {
+    text-decoration: underline;
+}
+
+/* Tablet Styles (768px - 1024px) */
+@media (max-width: 1024px) {
+    body {
+        padding-top: 0;
+    }
+
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    header .logo img {
+        max-width: 150px;
+        margin-bottom: 1rem;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    nav a {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .gallery h1 {
+        font-size: 4em;
+    }
+
+    .picpic {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Footer Responsive Adjustments */
+    .info-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .info-item.visit-us,
+    .info-item.connect-us {
+        margin: 10px 0;
+    }
+}
+
+/* Mobile Styles (up to 767px) */
+@media (max-width: 767px) {
+    body {
+        padding-top: 0;
+    }
+
+    header {
+        position: static;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .gallery h1 {
+        font-size: 2.5em;
+    }
+
+    .picpic {
+        grid-template-columns: 1fr;
+    }
+
+    /* Footer Responsive Adjustments */
+    .contact-section {
+        padding: 10px;
+    }
+
+    .info-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .info-item {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .info-item.visit-us,
+    .info-item.connect-us {
+        margin: 10px 0;
+    }
+}
+
+/* Ultra-Small Mobile Devices */
+@media (max-width: 375px) {
+    .gallery h1 {
+        font-size: 2em;
+    }
+}   

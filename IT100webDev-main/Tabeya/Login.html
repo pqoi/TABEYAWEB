@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Sign Up</title>
+    <link rel="stylesheet" href="CSS/Menu.css">
+    <link rel="stylesheet" href="CSS/Login.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="Photo/Tabeya Name.png" alt="Tabeya Logo">
+        </div>
+        <nav>
+            <a href="index.html" >HOME</a> 
+            <a href="Menu.html" >MENU</a>
+            <a href="CaterReservation.html">CATER RESERVATION</a>
+            <a href="GALLERY.html">GALLERY</a>
+            <a href="Review.html">TESTIMONY</a>
+            <a href="About.html">ABOUT</a>
+            <a href="Login.html" class="active">PROFILE</a>
+            <div class="cart-icon" id="view-cart-btn">
+                🛒 <span class="cart-count" id="cart-item-count">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="login-container">
+        <div id="form-content"></div>
+    </div>
+
+    <footer>
+        <div class="contact-section">
+            <div class="container">
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <p>Have any questions? We'd love to hear from you.</p>
+                    <div class="info-group">
+                        <div class="info-item visit-us">
+                            <img src="Photo/VisitUs.png" alt="Location Icon" class="icon">
+                            <div>
+                                <strong>Visit us</strong>
+                                <p>Poblacion 2, Vinzons Avenue,<br>Vinzons, Camarines Norte</p>
+                            </div>
+                        </div>
+                        <div class="info-item call-us">
+                            <img src="Photo/Selpon.png" alt="Phone Icon" class="icon">
+                            <div>
+                                <strong>Call us</strong>
+                                <p>09380839641</p>
+                            </div>
+                        </div>
+                        <div class="info-item connect-us">
+                            <img src="Photo/Facebook.png" alt="Facebook Icon" class="icon">
+                            <div>
+                                <strong>Connect to us</strong>
+                                <a href="https://www.facebook.com/profile.php?id=100063540027038" target="_blank" class="no-underline">Tabeya, VCN</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    const formContent = document.getElementById('form-content');
+    let isLoginMode = true;
+
+    // --- MOCK USER DATABASE (For demonstration only) ---
+    let users = JSON.parse(localStorage.getItem('tabeyaUsers')) || [];
+
+    function saveUsers() {
+        localStorage.setItem('tabeyaUsers', JSON.stringify(users));
+    }
+    
+    // --- 1. RENDER LOGIN FORM HTML ---
+    function renderLoginForm() {
+        formContent.innerHTML = `
+            <h2>LOG IN</h2>
+            <form id="login-form"> 
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit">LOG IN</button>
+            </form>
+            <div class="login-options">
+                Don't have an account? <a href="#" id="switch-to-signup">Sign Up</a>
+            </div>
+        `;
+        // Attach event listener for form submission
+        document.getElementById('login-form').addEventListener('submit', handleLogin);
+        
+        document.getElementById('switch-to-signup').addEventListener('click', (e) => {
+            e.preventDefault();
+            isLoginMode = false;
+            renderSignupForm();
+        });
+    }
+
+    // --- 2. RENDER SIGN-UP FORM HTML ---
+    function renderSignupForm() {
+        formContent.innerHTML = `
+            <h2>SIGN UP</h2>
+            <form id="signup-form"> 
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-password">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" name="confirm_password" required>
+                    <p id="password-match-message" style="display: none;"></p>
+                </div>
+                <button type="submit" id="signup-button" disabled>SIGN UP</button>
+            </form>
+            <div class="login-options">
+                Already have an account? <a href="#" id="switch-to-login">Log In</a>
+            </div>
+        `;
+        // Attach event listener for form submission
+        document.getElementById('signup-form').addEventListener('submit', handleSignup);
+        
+        // Add event listeners for switching back and password validation
+        document.getElementById('switch-to-login').addEventListener('click', (e) => {
+            e.preventDefault();
+            isLoginMode = true;
+            renderLoginForm();
+        });
+
+        const passwordInput = document.getElementById('signup-password');
+        const confirmInput = document.getElementById('signup-confirm-password');
+        const messageElement = document.getElementById('password-match-message');
+        const signupButton = document.getElementById('signup-button');
+
+        function validatePasswords() {
+            const password = passwordInput.value;
+            const confirmPassword = confirmInput.value;
+            
+            if (password && confirmPassword) {
+                if (password === confirmPassword) {
+                    messageElement.style.display = 'block';
+                    messageElement.textContent = 'Passwords Match!';
+                    messageElement.style.backgroundColor = '#008000'; // Green
+                    messageElement.style.color = '#fff';
+                    signupButton.disabled = false;
+                } else {
+                    messageElement.style.display = 'block';
+                    messageElement.textContent = 'Passwords do not match.';
+                    messageElement.style.backgroundColor = '#BC1823'; // Red
+                    messageElement.style.color = '#fff';
+                    signupButton.disabled = true;
+                }
+            } else {
+                messageElement.style.display = 'none';
+                signupButton.disabled = true;
+            }
+        }
+        
+        passwordInput.addEventListener('input', validatePasswords);
+        confirmInput.addEventListener('input', validatePasswords);
+    }
+
+    // --- 3. HANDLE FORM SUBMISSIONS & LOGIC ---
+    
+    // Function to perform the actual log out
+    function performLogout() {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('redirectAfterLogin'); // IMPORTANT: clear this on logout
+        alert("You have been successfully logged out.");
+        window.location.href = 'Login.html'; // Redirect to the login page
+    }
+
+    function handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        
+        const user = users.find(u => u.email === email && u.password === password);
+
+        if (user) {
+            // SUCCESS: Save login state and user info to localStorage
+            localStorage.setItem('currentUser', JSON.stringify({ name: user.name, email: user.email }));
+            
+            // Check for redirect URL from rating system
+            const redirectUrl = localStorage.getItem('redirectAfterLogin') || 'index.html';
+            localStorage.removeItem('redirectAfterLogin'); // Clean up the redirect flag
+            
+            alert(`Welcome back, ${user.name}!`);
+            window.location.href = redirectUrl;
+        } else {
+            alert("Login failed. Check your email and password.");
+        }
+    }
+    
+    function handleSignup(e) {
+        e.preventDefault();
+        const name = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+        
+        // Basic validation
+        if (users.find(u => u.email === email)) {
+            alert("Account already exists with this email.");
+            return;
+        }
+        
+        // SUCCESS: Add new user to the mock database
+        const newUser = { name, email, password };
+        users.push(newUser);
+        saveUsers();
+        
+        // Auto-log in and save state
+        localStorage.setItem('currentUser', JSON.stringify({ name: newUser.name, email: newUser.email }));
+
+        // Check for redirect URL from rating system
+        const redirectUrl = localStorage.getItem('redirectAfterLogin') || 'index.html';
+        localStorage.removeItem('redirectAfterLogin'); // Clean up the redirect flag
+
+        alert(`Sign up successful! Welcome, ${newUser.name}!`);
+        window.location.href = redirectUrl;
+    }
+
+    // --- 4. ACCOUNT HEADER LINK UPDATE (Crucial for this file) ---
+    function updateAccountLink() {
+        const accountLink = document.getElementById('account-link');
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+
+        if (user && accountLink) {
+            // If logged in, show the user's name
+            accountLink.textContent = user.name.split(' ')[0].toUpperCase();
+            accountLink.href = 'Account.html'; // Assuming you have an Account page
+            
+            // Add Logout function for the account link (optional, but good practice)
+            accountLink.onclick = (e) => { // Using onclick instead of addEventListener to ensure only one handler exists
+                e.preventDefault();
+                if (confirm(`Are you sure you want to log out, ${user.name.split(' ')[0]}?`)) {
+                    performLogout();
+                }
+            };
+
+        } else if (accountLink) {
+            // If not logged in, ensure it shows "LOG IN" and links to this page
+            accountLink.textContent = 'LOG IN';
+            accountLink.href = 'Login.html';
+            accountLink.onclick = null; // Clear any old event listeners
+        }
+    }
+
+
+    // --- 5. INITIALIZATION (WHERE THE LOGOUT BUTTON IS ADDED) ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Check if the user is already logged in
+        const currentUser = localStorage.getItem('currentUser');
+        updateAccountLink(); // Always run this to update the header
+
+        if (currentUser) {
+            const user = JSON.parse(currentUser);
+            
+            // Render the "Logged In" page content with a prominent LOG OUT button
+            formContent.innerHTML = `
+                <h2 style="color: #BC1823;">Welcome Back, ${user.name.split(' ')[0]}!</h2>
+                <p style="text-align: center; margin-top: 20px; font-size: 1.1em;">
+                    You are currently logged in as <strong>${user.email}</strong>.
+                </p>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button id="main-logout-btn" style="padding: 12px 30px; background-color: #BC1823; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 1.2em; font-weight: bold; margin-bottom: 15px;">
+                        LOG OUT
+                    </button>
+                    <br>
+                    <a href="index.html" style="color: #444; text-decoration: underline;">Continue Browsing</a>
+                </div>
+            `;
+            
+            // Attach the log out function to the new button
+            document.getElementById('main-logout-btn').addEventListener('click', () => {
+                if (confirm(`Are you sure you want to log out, ${user.name.split(' ')[0]}?`)) {
+                    performLogout();
+                }
+            });
+
+        } else {
+            // If not logged in, show the default login/signup form
+            renderLoginForm();
+        }
+    });
+</script>
+</body>
+</html>

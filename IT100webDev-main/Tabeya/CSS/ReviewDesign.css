@@ -1,0 +1,428 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #a81e1e; 
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(188, 24, 35, 0.8);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 100;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+header .logo img {
+  max-width: 120px;
+  height: auto;
+}
+/* Update Navigation Links */
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav a:hover,
+nav a:active {
+  color: yellow;
+}
+
+nav a.active {
+  color: yellow;
+}
+
+
+.background {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+
+.background img {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.rectangle-panel {
+  position: relative;
+  width: 800px;
+  max-width: 90%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  margin: 20px 0;
+  z-index: 1;
+  top: 35px;
+}
+
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.review-header h1 {
+  color: rgb(188, 24, 35);
+  font-size: 24px;
+}
+
+.overall-rating {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.overall-rating h2 {
+  font-size: 36px;
+  color: rgb(188, 24, 35);
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  color: #FFD700;
+  margin-bottom: 10px;
+}
+
+.total-reviews {
+  text-align: center;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.review-progress {
+  margin-bottom: 20px;
+}
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.progress-label {
+  flex: 1;
+}
+
+.progress-bar {
+  flex: 4;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: rgb(188, 24, 35);
+}
+
+.review-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  background-color: rgb(188, 24, 35);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #ff5c5c;
+}
+.review-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.review-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.rating-stars {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.rating-star {
+  font-size: 30px;
+  color: #e0e0e0;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.rating-star.active {
+  color: #FFD700;
+}
+
+.review-input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#close-modal-btn,
+.submit-review-btn{
+  background-color: rgb(188, 24, 35);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#close-modal-btn:hover,
+.submit-review-btn:hover {
+  background-color: #ff5c5c;
+}
+
+.user-reviews {
+  margin-top: 20px;
+}
+
+.user-review {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.user-review .review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-review .review-rating .star {
+  color: #e0e0e0;
+  font-size: 20px;
+}
+
+.user-review .review-rating .star.active {
+  color: #FFD700;
+}
+.star {
+  color: #ddd; /* Default star color */
+}
+
+.star.active {
+  color: gold; /* Active star color */
+}
+
+.star.half-star {
+  position: relative;
+  overflow: hidden;
+}
+
+.star.half-star::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: gold;
+}
+/*Footer Styling*/
+.contact-section {
+  background-color: rgba(188, 24, 35, 0.9);
+  padding: 5px;
+  height: auto; 
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact-info {
+  max-width: 100%;
+  text-align: center;
+  color: yellow;
+}
+
+.contact-info h2 {
+  font-size: 1.5em;
+  color: yellow;
+}
+
+.contact-info p {
+  font-size: 1em;
+  color: rgb(255, 255, 255);
+  
+}
+
+.info-group {
+  display: flex;
+  justify-content: space-between; 
+  align-items: flex-start; 
+  flex-wrap: nowrap; 
+  gap: 20px; 
+}
+.info-item.visit-us {
+  margin-right: 130px; 
+}
+
+.info-item.connect-us {
+  margin-left: 130px; 
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  text-align: left;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.no-underline {
+  color: white;
+  text-decoration: none;
+}
+
+.no-underline:hover {
+  text-decoration: underline;
+}
+/* Tablet Styles (768px - 1024px) */
+@media (max-width: 1024px) {
+  body {
+    padding-top: 0;
+  }
+
+  header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  header .logo img {
+    max-width: 150px;
+    margin-bottom: 1rem;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  nav a {
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Footer Responsive Adjustments */
+  .info-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-item.visit-us,
+  .info-item.connect-us {
+    margin: 10px 0;
+  }
+}
+
+/* Mobile Styles (up to 767px) */
+@media (max-width: 767px) {
+  body {
+    padding-top: 0;
+  }
+
+  header {
+    position: static;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav a {
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Footer Responsive Adjustments */
+  .contact-section {
+    padding: 10px;
+  }
+
+  .info-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-item {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .info-item.visit-us,
+  .info-item.connect-us {
+    margin: 10px 0;
+  }
+}
+

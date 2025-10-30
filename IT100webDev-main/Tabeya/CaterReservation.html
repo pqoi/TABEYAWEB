@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cater Reservation | Tabeya</title>
+    <link rel="stylesheet" href="CSS/CaterDesign.css"> 
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="Photo/Tabeya Name.png" alt="Tabeya name">
+        </div>
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="Menu.html">MENU</a>
+            <a href="#" id="cater-reservation-link" class="active">CATER RESERVATION</a> 
+            <a href="GALLERY.html">GALLERY</a>
+            <a href="Review.php">TESTIMONY</a>
+            <a href="About.html">ABOUT</a>
+            <a href="Login.html" id="account-link">PROFILE</a>
+            <div class="cart-icon" id="view-cart-btn">
+                🛒 <span class="cart-count" id="cart-item-count">0</span>
+            </div>
+        </nav>
+    </header>
+    
+<main>
+    <section class="hero-section" id="cater-form-target">
+        <img src="Photo/Background.jpg" alt="Background Image">
+        <h1 class="quote">YOUR <br> SATISFACTION <BR> IS OUR <BR> PASSION</h1>
+        
+        <div class="rectangle-panel">
+            <h2 class="panel-heading">CATERING INQUIRY</h2>
+            <form action="userInfo.php" method='POST' id="cater-reservation-form">
+                <div class="form-row">
+                    <label for="full-name">Your Full Name</label>
+                    <input type="text" id="full-name" name="full-name" required readonly>
+                </div>
+    
+                <div class="form-row">
+                    <label for="email">Your Email Address</label>
+                    <input type="email" id="email" name="email" required readonly>
+                </div>
+    
+                <div class="form-row">
+                    <label for="guests">Number of Guests</label>
+                    <input type="number" id="guests" name="guests" min="1" value="50" required>
+                </div>
+    
+                <div class="form-row">
+                    <label for="date">What is the Date?</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                
+                <div class="form-row">
+                    <label for="time">What Time?</label>
+                    <select id="time" name="time" required>
+                        <option value="" disabled selected>Select time</option>
+                    </select>
+                </div>
+    
+                <div class="form-row">
+                    <label for="phone">Your Phone Number</label>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        pattern="^09\d{9}$" 
+                        placeholder="e.g., 09XXXXXXXXX" 
+                        maxlength="11" 
+                        required readonly>
+                </div>
+
+                <div class="form-row">
+                    <label for="event-type">Type of Event</label>
+                    <select id="event-type" name="event-type" required>
+                        <option value="" disabled selected>Select event type</option>
+                        <option value="birthday">Birthday</option>
+                        <option value="anniversary">Anniversary</option>
+                        <option value="wedding">Wedding</option>
+                        <option value="meeting">Meeting/Corporate Event</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+    
+                <div class="form-row full-width">
+                    <button type="submit" class="continue-btn">Continue</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="background-section">
+            <div class="panel">
+                <div class="icon">
+                    <img src="Photo/Chair.jpg" alt="Table Icon">
+                </div>
+                <h3>Friendly <span>Atmosphere</span></h3>
+                <p>Relax in a friendly and inviting environment.</p>
+            </div>
+            
+            <div class="panel">
+                <div class="icon">
+                    <img src="Photo/Spoon.jpg" alt="Food Icon">
+                </div>
+                <h3>Best <span>Food Quality</span></h3>
+                <p>Quality you can taste in every dish. Crafted to delight your senses.</p>
+            </div>
+            
+            <div class="panel">
+                <div class="icon">
+                    <img src="Photo/Pesos.jpg" alt="Cost Icon">
+                </div>
+                <h3>Low Costing <span>Food</span></h3>
+                <p>Delicious flavors at prices that fit your budget.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="delivery-section">
+        <div class="delivery-content">
+            <h1>OUR FAST <br><span>DELIVERY <br>FOR YOU</span></h1>
+            <p>Enjoy Free Delivery Within Poblacion, Vinzons!</p>
+            <a href="#cater-form-target" class="order-btn" id="scroll-to-form">ORDER NOW</a>
+        </div>
+        <div class="delivery-image">
+            <img src="Photo/Delivery man.jpg" alt="Delivery Man">
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="contact-section">
+        <div class="container">
+            <div class="contact-info">
+                <h2>Contact Us</h2>
+                <p>Have any questions? We'd love to hear from you.</p>
+                <div class="info-group">
+                    <div class="info-item visit-us">
+                        <img src="Photo/VisitUs.png" alt="Location Icon" class="icon">
+                        <div>
+                            <strong>Visit us</strong>
+                            <p>Poblacion 2, Vinzons Avenue,<br>Vinzons, Camarines Norte</p>
+                        </div>
+                    </div>
+                    <div class="info-item call-us">
+                        <img src="Photo/Selpon.png" alt="Phone Icon" class="icon">
+                        <div>
+                            <strong>Call us</strong>
+                            <p>09380839641</p>
+                        </div>
+                    </div>
+                    <div class="info-item connect-us">
+                        <img src="Photo/Facebook.png" alt="Facebook Icon" class="icon">
+                        <div>
+                            <strong>Connect to us</strong>
+                            <a href="https://www.facebook.com/profile.php?id=100063540027038" target="_blank" class="no-underline">Tabeya, VCN</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div id="cart-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Your Cart</h2>
+        <div id="cart-items">
+            <p id="empty-cart-message" style="text-align: center; color: #888;">Your cart is empty.</p>
+        </div>
+        <div class="cart-summary">
+            <strong>Total: <span id="cart-total">₱0.00</span></strong>
+        </div>
+        <button id="checkout-btn" disabled>Proceed to Checkout</button>
+    </div>
+</div>
+
+<script>
+    // ====================================================================
+    // === CORE LOGIN/SECURITY FUNCTIONS ===
+    // ====================================================================
+    const LOGIN_PAGE = 'Login.html';
+    const CATER_RESERVATION_PAGE = 'CaterReservation.html'; // Current Page
+
+    /**
+     * Checks if the user is logged in.
+     * @returns {object|null} The user object if logged in, null otherwise.
+     */
+    function getCurrentUser() {
+        try {
+            return JSON.parse(localStorage.getItem('currentUser'));
+        } catch (e) {
+            console.error("Error parsing user data from localStorage:", e);
+            return null;
+        }
+    }
+
+    /**
+     * Updates the PROFILE link in the header and pre-fills the form fields.
+     */
+    function updateAccountLinkAndPrefillForm() {
+        const accountLink = document.getElementById('account-link');
+        const user = getCurrentUser();
+
+        // 1. Update Header Link (Login/Logout functionality)
+        if (accountLink) {
+            accountLink.onclick = null; 
+            if (user) {
+                // LOGGED IN STATE
+                const userName = user.name.split(' ')[0].toUpperCase();
+                accountLink.textContent = userName;
+                accountLink.href = '#'; 
+                
+                accountLink.onclick = (e) => {
+                    e.preventDefault();
+                    if (confirm(`Are you sure you want to log out, ${userName}?`)) {
+                        localStorage.removeItem('currentUser');
+                        localStorage.removeItem('tabeyaCart');
+                        // Reload or redirect to clear the pre-filled form and update nav
+                        window.location.href = 'index.html'; 
+                    }
+                };
+            } else {
+                // LOGGED OUT STATE
+                accountLink.textContent = 'PROFILE';
+                accountLink.href = LOGIN_PAGE;
+            }
+        }
+        
+        // 2. Prefill Form Fields (Must be readonly as they are user's account details)
+        const fullNameInput = document.getElementById('full-name');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+
+        if (fullNameInput) fullNameInput.value = user ? user.name || '' : '';
+        if (emailInput) emailInput.value = user ? user.email || '' : '';
+        if (phoneInput) phoneInput.value = user ? user.phone || '' : '';
+    }
+
+    // ====================================================================
+    // === FORM VALIDATION AND TIME SLOTS ===
+    // ====================================================================
+
+    /**
+     * Generates time slots between 8 AM and 8 PM, excluding past slots for today.
+     */
+    function generateTimeSlots() {
+        const timeSelect = document.getElementById('time');
+        const dateInput = document.getElementById('date');
+        const now = new Date();
+        
+        // Use a date object for comparison, setting time to start of day
+        const selectedDate = new Date(dateInput.value);
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+        timeSelect.innerHTML = '<option value="" disabled selected>Select time</option>';
+        
+        let startHour = 8; // Start at 8 AM
+        const endHour = 20; // End at 8 PM (20:00)
+
+        // If the selected date is today, adjust the start hour to be at least 1 hour from now
+        if (selectedDate.getTime() === today.getTime()) {
+            let currentHour = now.getHours();
+            // Start one hour after the current time, but not before 8 AM
+            startHour = Math.max(8, currentHour + 1); 
+        }
+
+        let hasAvailableSlots = false;
+
+        for (let hour = startHour; hour <= endHour; hour++) {
+            // Stop generating slots after 8 PM
+            if (hour > endHour) break; 
+
+            // Convert 24-hour time to 12-hour format string
+            const displayHour = hour > 12 ? hour - 12 : hour;
+            const period = hour >= 12 ? 'PM' : 'AM';
+            const formattedTime = `${displayHour}:00 ${period}`;
+            const valueTime = `${hour.toString().padStart(2, '0')}:00`; // 24-hour value for backend
+
+            const option = document.createElement('option');
+            option.value = valueTime;
+            option.textContent = formattedTime;
+            timeSelect.appendChild(option);
+            hasAvailableSlots = true;
+        }
+
+        if (!hasAvailableSlots && startHour <= endHour) {
+            // Only show this message if the loop didn't run because all slots for today are past
+             const option = document.createElement('option');
+             option.value = '';
+             option.textContent = 'No slots available for this date.';
+             option.disabled = true;
+             timeSelect.appendChild(option);
+        }
+    }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('cater-reservation-form');
+        const dateInput = document.getElementById('date');
+        const phoneInput = document.getElementById('phone');
+        const caterLink = document.getElementById('cater-reservation-link');
+        const scrollToFormBtn = document.getElementById('scroll-to-form');
+
+        // 1. Initial Setup (Security and Pre-fill)
+        updateCartCount();
+        updateAccountLinkAndPrefillForm();
+        
+        // 2. Date Input Setup
+        const today = new Date();
+        const minDate = today.toISOString().split('T')[0]; 
+        dateInput.setAttribute('min', minDate);
+        dateInput.value = minDate; 
+        generateTimeSlots();
+
+        // 3. Re-generate time slots whenever the date changes
+        dateInput.addEventListener('change', generateTimeSlots);
+
+        // 4. Scroll to Form button handler
+        if(scrollToFormBtn) {
+             scrollToFormBtn.addEventListener('click', (e) => {
+                 e.preventDefault();
+                 document.getElementById('cater-form-target').scrollIntoView({ behavior: 'smooth' });
+             });
+        }
+        
+        // 5. Phone Number Input Cleanup (Ensures only digits and max length of 11)
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function () {
+                let value = this.value.replace(/\D/g, ''); // Remove non-digit characters
+                
+                // Ensure it is 11 digits long, starting with 09
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                } else if (value.length >= 2 && !value.startsWith('09')) {
+                    // Force the Philippine format (assuming user is filling in a mobile number)
+                    value = '09' + value.substring(2);
+                }
+
+                this.value = value;
+            });
+        }
+
+        // 6. Form Submission (AJAX/Fetch)
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!this.checkValidity()) {
+                    alert('Please fill out all required fields.');
+                    return;
+                }
+                
+                // **CRITICAL SECURITY CHECK**
+                if (!getCurrentUser()) {
+                     alert("You must log in before submitting a reservation.");
+                     localStorage.setItem('redirectAfterLogin', CATER_RESERVATION_PAGE);
+                     window.location.href = LOGIN_PAGE;
+                     return;
+                }
+                
+                const formData = new FormData(this);
+                
+                const submitBtn = this.querySelector('.continue-btn');
+                submitBtn.textContent = 'Submitting...';
+                submitBtn.disabled = true;
+
+                fetch('userInfo.php', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => {
+                    submitBtn.textContent = 'Continue';
+                    submitBtn.disabled = false;
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    
+                    // Attempt to parse JSON or fall back to text
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        return response.json();
+                    } else {
+                         return response.text().then(text => {
+                             console.log('Server response (non-JSON):', text);
+                             return { status: 'success', message: 'Reservation submitted successfully.' };
+                         });
+                    }
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Catering Reservation successfully submitted! We will contact you soon.');
+                        form.reset(); 
+                        updateAccountLinkAndPrefillForm(); // Re-run prefill
+                        generateTimeSlots(); // Re-generate slots
+                    } else {
+                        alert(`Submission Failed: ${data.message || 'An unknown server error occurred.'}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                    alert(`A network or server error occurred: ${error.message}. Please try again.`);
+                });
+            });
+        }
+        
+        // 7. Prevent the active link from navigating itself
+        if (caterLink) {
+            caterLink.addEventListener('click', (e) => e.preventDefault());
+        }
+    });
+
+    // ====================================================================
+    // === CART MANAGEMENT LOGIC (Standardized) ===
+    // ====================================================================
+    const cartModal = document.getElementById('cart-modal');
+    const viewCartBtn = document.getElementById('view-cart-btn');
+    const closeBtn = document.querySelector('.modal-content .close-btn');
+    const cartCountElement = document.getElementById('cart-item-count');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalElement = document.getElementById('cart-total');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    
+    // Load cart from localStorage or start with an empty array
+    let cart = JSON.parse(localStorage.getItem('tabeyaCart')) || [];
+
+    function saveCart() {
+        localStorage.setItem('tabeyaCart', JSON.stringify(cart));
+        updateCartCount(); 
+    }
+
+    function updateCartCount() {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountElement.textContent = totalItems;
+    }
+
+    function updateCartTotal() {
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartTotalElement.textContent = `₱${total.toFixed(2)}`;
+        // Disable if empty OR not logged in
+        checkoutBtn.disabled = cart.length === 0 || !getCurrentUser(); 
+        
+        // Update checkout button text to indicate login required if applicable
+        if (!getCurrentUser() && cart.length > 0) {
+            checkoutBtn.textContent = 'Log In to Checkout';
+        } else {
+            checkoutBtn.textContent = 'Proceed to Checkout';
+        }
+    }
+
+    /**
+     * Renders the cart contents using the HTML structure defined in CSS.
+     */
+    function renderCart() {
+    cartItemsContainer.innerHTML = '';
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p id="empty-cart-message" style="text-align: center; color: #888; margin-top: 20px;">Your cart is empty. Add items from the Menu!</p>';
+    } else {
+         // Create a list element to hold all items for better structure
+        const list = document.createElement('div');
+        list.id = 'cart-items-list'; // Matches your CSS ID
+
+        cart.forEach((item, index) => {
+            const subtotal = item.price * item.quantity;
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('cart-item');
+            
+            // Assuming image property exists for completeness, though not strictly required by the prompt
+            const imageSrc = item.image || 'Photo/default-item.jpg'; 
+
+            itemDiv.innerHTML = `
+                <img src="${imageSrc}" alt="${item.name}" class="cart-item-image">
+                <div class="cart-item-info">
+                    <span class="cart-item-name">${item.name}</span>
+                    <span class="cart-item-price">@ ₱${item.price.toFixed(2)}</span>
+                </div>
+                <div class="cart-item-controls">
+                    <button class="qty-btn" data-index="${index}" data-action="decrease">-</button>
+                    <span class="cart-item-qty">${item.quantity}</span>
+                    <button class="qty-btn" data-index="${index}" data-action="increase">+</button>
+                </div>
+                <span class="cart-item-subtotal">₱${subtotal.toFixed(2)}</span>
+                `;
+            list.appendChild(itemDiv);
+        });
+        cartItemsContainer.appendChild(list);
+    }
+    updateCartTotal();
+    saveCart();
+}
+
+    // Open Modal - SECURED
+    viewCartBtn.addEventListener('click', () => {
+        if (!getCurrentUser()) {
+             alert("You must log in to view your cart.");
+             localStorage.setItem('redirectAfterLogin', CATER_RESERVATION_PAGE);
+             window.location.href = LOGIN_PAGE;
+             return;
+        }
+        renderCart(); 
+        cartModal.style.display = 'block';
+    });
+
+    // Close Modal (X button)
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
+    }
+
+    // Close Modal (Click outside)
+    window.addEventListener('click', (event) => {
+        if (event.target === cartModal) {
+            cartModal.style.display = 'none';
+        }
+    });
+
+    // Checkout Button Handler - SECURED
+    checkoutBtn.addEventListener('click', () => {
+        if (!getCurrentUser()) {
+            // Already checked by updateCartTotal, but good to have a final check
+            alert("You must log in to proceed to checkout.");
+            localStorage.setItem('redirectAfterLogin', CATER_RESERVATION_PAGE);
+            window.location.href = LOGIN_PAGE;
+            return;
+        }
+        if (cart.length > 0) {
+            alert("Redirecting to checkout page with your order details...");
+            // TODO: window.location.href = 'Checkout.html'; 
+        }
+    });
+
+    // Quantity Control Handler
+    cartItemsContainer.addEventListener('click', (e) => {
+        const target = e.target;
+        const index = parseInt(target.getAttribute('data-index'));
+
+        if (!isNaN(index) && getCurrentUser()) {
+            let item = cart[index];
+            
+            if (target.classList.contains('qty-btn')) {
+                const action = target.getAttribute('data-action');
+                if (action === 'increase') {
+                    item.quantity += 1;
+                } else if (action === 'decrease' && item.quantity > 1) {
+                    item.quantity -= 1;
+                } else if (action === 'decrease' && item.quantity === 1) {
+                    // Remove if quantity drops to zero
+                    cart.splice(index, 1);
+                }
+            }
+        }
+        
+        renderCart(); 
+    });
+</script>
+</body>
+</html>

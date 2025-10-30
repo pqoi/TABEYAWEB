@@ -1,0 +1,631 @@
+/* =========================================== */
+/* === GLOBAL & LAYOUT STYLES === */
+/* =========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-image: url('../Photo/Background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px; /* Space for the fixed header */
+    min-height: 100vh; 
+}
+
+/* =========================================== */
+/* === HEADER/NAVIGATION STYLES === */
+/* =========================================== */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(188, 24, 35, 0.8);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+header .logo img {
+    max-width: 120px;
+    height: auto;
+}
+
+nav {
+    display: flex;
+    /* CHANGE: Align items centrally to match cart icon */
+    align-items: center; 
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav a:hover, nav a:active {
+    color: yellow;
+}
+
+nav a.active {
+    color: yellow;
+}
+
+/* =========================================== */
+/* === CART & MODAL STYLES (NEW) === */
+/* =========================================== */
+
+/* Cart Icon in Header */
+.cart-icon {
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-left: 20px;
+    position: relative;
+    color: white; 
+}
+
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: yellow;
+    color: #BC1823;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7em;
+    font-weight: bold;
+    line-height: 1; 
+}
+
+/* Add to Cart Button on Menu Items */
+.add-to-cart-btn {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 8px 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    width: 100%; /* Make button take full width of its container */
+    box-sizing: border-box;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #a0141d;
+}
+
+/* --- Modal Styles --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 200; /* Above header */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    /* Centered in view, slight adjustment for aesthetics */
+    margin: 10vh auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; 
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #BC1823;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Cart Item List Styles */
+#cart-items-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-bottom: 15px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 15px;
+    border-radius: 4px;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-item-name {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.cart-item-price {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.cart-item-controls button {
+    background: #BC1823;
+    color: white;
+    border: none;
+    padding: 3px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9em;
+    margin: 0 2px;
+    line-height: 1;
+}
+
+.cart-item-qty {
+    display: inline-block;
+    min-width: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.cart-item-subtotal {
+    font-weight: bold;
+    min-width: 60px;
+    text-align: right;
+    color: #BC1823;
+}
+
+.cart-summary {
+    text-align: right;
+    font-size: 1.2em;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 2px solid #BC1823;
+}
+
+#checkout-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #008000; /* Green for checkout */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+#checkout-btn:hover {
+    background-color: #006400;
+}
+
+
+/* =========================================== */
+/* === MENU PAGE STYLES (Image-Beside-Text Layout) === */
+/* =========================================== */
+
+.menu-section {
+    padding: 20px;
+    flex: 1;
+    z-index: 1; 
+    margin-bottom: 40px;
+    margin-top: 40px; 
+    width: 100%;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menu-section h2 {
+    color: yellow;
+    margin-bottom: 30px; 
+    text-align: center;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 3em; 
+    margin-top: 0; 
+}
+
+.menu-category {
+    background-color: rgba(188, 24, 35, 0.8);
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 35px;
+    padding: 15px;
+}
+
+.menu-category h3 {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 2.2em; 
+    text-align: center;
+    margin-bottom: 15px;
+    color: white;
+    padding: 5px 0;
+}
+
+/* --- Menu Grid Container --- */
+.menu-grid2 {
+    display: grid;
+    /* Responsive grid with a minimum item width of 350px */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 25px;
+    padding: 10px;
+}
+
+/* --- Individual Menu Item --- */
+.menu-item2 {
+    /* Uses Flexbox to arrange image and text side-by-side */
+    display: flex; 
+    align-items: flex-start;
+    
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden; 
+    padding: 0; 
+}
+
+.menu-item2:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* Image Container (Left side) */
+.item-image-container {
+    flex: 0 0 120px; /* Fixed width for the image container */
+    height: 120px; 
+    overflow: hidden;
+}
+
+.item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the container */
+    display: block;
+}
+
+/* Text Details Container (Right side) */
+.item-details-container {
+    flex-grow: 1; 
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    min-height: 120px;
+}
+
+.item-info2 {
+    /* Contains name and price */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.item-name {
+    font-weight: bold;
+    color: white;
+    font-size: 1.1em;
+    line-height: 1.3;
+}
+
+.item-price {
+    font-weight: bold;
+    color: yellow;
+    font-size: 1.2em;
+    margin-top: 5px;
+}
+
+/* --- Rating Styles (For dynamic stars) --- */
+.rating-trigger {
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.star-rating {
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+
+.star.full {
+    color: gold;
+}
+
+.star.empty {
+    color: #ccc;
+}
+
+/* --- DEPRECATED/OLD MENU STYLES CLEANUP --- */
+/* These classes are hidden as they are no longer used by the JavaScript */
+.menu-grid, .menu-item, .menu-grid1, .menu-item1 {
+    display: none !important; 
+}
+
+/* =========================================== */
+/* === FOOTER STYLING === */
+/* =========================================== */
+
+footer {
+    width: 100%;
+    flex-shrink: 0; /* Prevents footer from shrinking */
+}
+
+.contact-section {
+    background-color: rgba(188, 24, 35, 0.9);
+    padding: 5px; 
+    height: auto; 
+    width: 100%;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contact-info {
+    max-width: 100%;
+    text-align: center;
+    color: yellow;
+}
+
+.contact-info h2 {
+    font-size: 1.5em;
+    color: yellow;
+}
+
+.contact-info p {
+    font-size: 1em;
+    color: rgb(255, 255, 255);
+}
+
+.info-group {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+    flex-wrap: nowrap; 
+    gap: 1px; 
+}
+
+/* Unique explicit margins for desktop view */
+.info-item.visit-us {
+    margin-right: 130px; 
+}
+
+.info-item.connect-us {
+    margin-left: 130px; 
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    text-align: left;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(287deg) brightness(108%) contrast(100%); 
+}
+
+.no-underline {
+    color: white;
+    text-decoration: none;
+}
+
+.no-underline:hover {
+    text-decoration: underline;
+    color: yellow;
+}
+
+/* =========================================== */
+/* === MEDIA QUERIES (Responsive Design) === */
+/* =========================================== */
+
+/* Tablet Styles (768px - 1024px) */
+@media (max-width: 1024px) {
+    /* Navigation */
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    header .logo img {
+        max-width: 100px;
+        margin-bottom: 1rem;
+    }
+
+    /* Important adjustment for nav alignment on tablet */
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        /* Ensure all nav elements are centered */
+        width: 100%;
+    }
+
+    /* Menu Grid */
+    .menu-grid2 {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    }
+
+    .menu-section h2 {
+        font-size: 2.5em;
+    }
+
+    .menu-category h3 {
+        font-size: 1.8em;
+    }
+    
+    /* Footer - Stacking items */
+    .info-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Resetting explicit margins for stacking */
+    .info-item.visit-us,
+    .info-item.connect-us,
+    .info-item.call-us {
+        margin: 10px 0; 
+    }
+
+    .info-item {
+        justify-content: center;
+        text-align: center;
+        min-width: 90%;
+    }
+}
+
+/* Mobile Styles (up to 767px) */
+@media (max-width: 767px) {
+    body {
+        /* Remove padding-top for static header */
+        padding-top: 0;
+    }
+
+    header {
+        /* Set header to static flow on small screens to prevent covering content */
+        position: static;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    /* Menu Section */
+    .menu-section {
+        padding: 10px;
+        margin-top: 10px;
+    }
+    
+    .menu-grid2 {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 20px;
+    }
+
+    .menu-item2 {
+        /* Keep image/text side-by-side but reduce size */
+        flex-direction: row; 
+    }
+    
+    .item-image-container {
+        flex: 0 0 100px; 
+        height: 100px;
+    }
+    
+    .item-details-container {
+        min-height: 100px;
+        padding: 8px 10px;
+    }
+
+    .menu-section h2 {
+        font-size: 2em;
+    }
+    
+    /* Footer - Stack icon and text for very small screens */
+    .info-group {
+        flex-direction: column;
+    }
+    
+    .info-item {
+        flex-direction: column; 
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .icon {
+        margin: 0 0 5px 0;
+    }
+    
+    /* Adjust modal for small screens */
+    .modal-content {
+        margin: 5vh auto;
+    }
+    
+    .cart-item {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .cart-item-info {
+        flex-grow: 0;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .cart-item-controls {
+        order: 3;
+    }
+    
+    .cart-item-subtotal {
+        order: 4;
+    }
+}

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="CSS/Menu.css">
+    </head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="Photo/Tabeya Name.png" alt="Tabeya Logo">
+        </div>
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="Menu.html" class="active">MENU</a>
+            <a href="#" id="cater-reservation-link">CATER RESERVATION</a>
+            <a href="GALLERY.html">GALLERY</a>
+            <a href="Review.php">TESTIMONY</a>
+            <a href="About.html">ABOUT</a>
+            <a href="Login.html" id="account-link">PROFILE</a> 
+            <div class="cart-icon" id="view-cart-btn">
+                🛒 <span class="cart-count" id="cart-item-count">0</span>
+            </div>
+
+        </nav>
+    </header>
+
+    <section class="menu-section">
+        <h2>OUR MENU</h2>
+        <div id="dynamic-menu-content">
+        </div>
+    </section>
+
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items-list">
+            </div>
+            <div class="cart-summary">
+                <strong>Total: ₱<span id="cart-total">0.00</span></strong>
+            </div>
+            <button id="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+    <footer>
+        <div class="contact-section">
+            <div class="container">
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <p>Have any questions? We'd love to hear from you.</p>
+                    <div class="info-group">
+                        <div class="info-item visit-us">
+                            <img src="Photo/VisitUs.png" alt="Location Icon" class="icon">
+                            <div>
+                                <strong>Visit us</strong>
+                                <p>Poblacion 2, Vinzons Avenue,<br>Vinzons, Camarines Norte</p>
+                            </div>
+                        </div>
+                        <div class="info-item call-us">
+                            <img src="Photo/Selpon.png" alt="Phone Icon" class="icon">
+                            <div>
+                                <strong>Call us</strong>
+                                <p>09380839641</p>
+                            </div>
+                        </div>
+                        <div class="info-item connect-us">
+                            <img src="Photo/Facebook.png" alt="Facebook Icon" class="icon">
+                            <div>
+                                <strong>Connect to us</strong>
+                                <a href="https://www.facebook.com/profile.php?id=100063540027038" target="_blank" class="no-underline">Tabeya, VCN</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ====================================================================
+        // === CORE LOGIN CHECK (Updated to use localStorage) ===
+        // ====================================================================
+        function checkUserLoginStatus() {
+            // Checks if the 'currentUser' key exists in localStorage
+            return localStorage.getItem('currentUser') !== null;
+        }
+
+        const LOGIN_PAGE = 'Login.html';
+        const CATER_RESERVATION_PAGE = 'CaterReservation.html';
+
+        function checkLoginAndProceed(redirectTarget) {
+            // FIX IS HERE: Uses the dynamic login check function
+            if (!checkUserLoginStatus()) { 
+                alert("You must log in to perform this action.");
+                if (redirectTarget) {
+                    // Save the intended page to redirect back to after login
+                    localStorage.setItem('redirectAfterLogin', redirectTarget);
+                }
+                window.location.href = LOGIN_PAGE;
+                return false;
+            }
+            return true;
+        }
+
+        // --- 1. MENU DATA SOURCE with 'id' added for cart tracking ---
+        const menuData = [
+            {
+                category: "RICE MEAL",
+                items: [
+                    { id: 'rice-sisig', name: "PORK SISIG SOLO w/ EGG", price: 135, rating: 4, image: "Photo/sisig.jpg" },
+                    { id: 'rice-adobo', name: "PORK ADOBO w/ EGG", price: 125, rating: 4, image: "Photo/adobo.jpg" },
+                    { id: 'rice-tocino', name: "PORK TOCINO w/ EGG", price: 105, rating: 3, image: "Photo/tocino.jpg" },
+                    { id: 'rice-tapa', name: "BEEF TAPA w/ EGG", price: 110, rating: 5, image: "Photo/tapa.jpg" },
+                    { id: 'rice-teriyaki', name: "BEEF TERIYAKI w/ EGG", price: 125, rating: 3, image: "Photo/teriyaki.jpg" },
+                    { id: 'rice-porkchop', name: "BREADED PORKCHOP w/ EGG", price: 125, rating: 4, image: "Photo/porkchop.jpg" },
+                    { id: 'rice-tofu', name: "SIZZLING TOFU w/ EGG", price: 100, rating: 3, image: "Photo/tofu.jpg" },
+                    { id: 'rice-spam', name: "SPAM w/ EGG", price: 125, rating: 4, image: "Photo/spam.jpg" },
+                    { id: 'rice-chicken_meal', name: "BREADED CHICKEN w/ EGG", price: 100, rating: 3, image: "Photo/chicken_meal.jpg" },
+                    { id: 'rice-bbq_veg', name: "2PCS PORK BBQ w/ BUTTER VEG.", price: 130, rating: 5, image: "Photo/bbq_veg.jpg" },
+                    { id: 'rice-chicken_pieces', name: "2PCS BREADED CHICKEN", price: 145, rating: 4, image: "Photo/chicken_pieces.jpg" },
+                    { id: 'rice-bbq_shanghai', name: "BBQ w/ SHANGHAI", price: 135, rating: 4, image: "Photo/bbq_shanghai.jpg" },
+                    { id: 'rice-bbq_chicken', name: "BBQ w/ CHICKEN MEAL", price: 145, rating: 5, image: "Photo/bbq_chicken.jpg" },
+                    { id: 'rice-bicol_shanghai', name: "BICOL EXPRESS w/ SHANGHAI", price: 165, rating: 3, image: "Photo/bicol_shanghai.jpg" },
+                    { id: 'rice-bicol_chicken', name: "BICOL EXPRESS w/ FRIED CHICKEN", price: 165, rating: 4, image: "Photo/bicol_chicken.jpg" },
+                    { id: 'rice-bbq_bicol', name: "BBQ w/ BICOL EXPRESS", price: 140, rating: 4, image: "Photo/bbq_bicol.jpg" }
+                ]
+            },
+            {
+                category: "PLATTER",
+                items: [
+                    { id: 'platter-crispy_sisig', name: "CRISPY PORK SISIG", price: 250, rating: 5, image: "Photo/crispy_sisig.jpg" },
+                    { id: 'platter-crispy_sisig_egg', name: "CRISPY PORK SISIG w/ EGG", price: 265, rating: 4, image: "Photo/crispy_sisig_egg.jpg" },
+                    { id: 'platter-lechon_kawali', name: "LECHON KAWALI", price: 350, rating: 5, image: "Photo/lechon_kawali.jpg" },
+                    { id: 'platter-lumpia_shanghai', name: "LUMPIANG SHANGHAI", price: 250, rating: 4, image: "Photo/lumpia_shanghai.jpg" },
+                    { id: 'platter-buttered_chicken', name: "BUTTERED CHICKEN", price: 250, rating: 5, image: "Photo/buttered_chicken.jpg" },
+                    { id: 'platter-calamares', name: "CALAMARES", price: 320, rating: 4, image: "Photo/calamares.jpg" },
+                    { id: 'platter-fried_lumpia', name: "FRIED LUMPIA VEG. (12 PCS)", price: 145, rating: 3, image: "Photo/fried_lumpia.jpg" },
+                    { id: 'platter-tokwat_baboy', name: "TOKWA'T BABOY", price: 260, rating: 4, image: "Photo/tokwat_baboy.jpg" },
+                    { id: 'platter-beef_steak', name: "BEEF STEAK TAGALOG", price: 340, rating: 5, image: "Photo/beef_steak.jpg" },
+                    { id: 'platter-sizzling_squid', name: "SIZZLING SPICY SQUID", price: 360, rating: 4, image: "Photo/sizzling_squid.jpg" },
+                    { id: 'platter-sizzling_tofu', name: "SIZZLING TOFU", price: 180, rating: 3, image: "Photo/sizzling_tofu.jpg" },
+                    { id: 'platter-bicol_express', name: "BICOL EXPRESS", price: 260, rating: 4, image: "Photo/bicol_express.jpg" },
+                    { id: 'platter-pork_adobo', name: "PORK ADOBO", price: 250, rating: 5, image: "Photo/pork_adobo.jpg" },
+                    { id: 'platter-bbq_platter', name: "6PCS PORK BBQ w/ BUTTER VEG.", price: 270, rating: 4, image: "Photo/bbq_platter.jpg" },
+                    { id: 'platter-chopsuey', name: "CHOPSUEY", price: 250, rating: 3, image: "Photo/chopsuey.jpg" },
+                    { id: 'platter-chicken_veg', name: "CHICKEN w/ MIXED VEG", price: 480, rating: 4, image: "Photo/chicken_veg.jpg" },
+                    { id: 'platter-butter_shrimp', name: "GARLIC BUTTER SHRIMP", price: 260, rating: 5, image: "Photo/butter_shrimp.jpg" },
+                    { id: 'platter-shrimp_karekare', name: "SHRIMP & SQUID KARE KARE", price: 480, rating: 4, image: "Photo/shrimp_karekare.jpg" },
+                    { id: 'platter-bagnet_karekare', name: "BAGNET KARE KARE", price: 450, rating: 5, image: "Photo/bagnet_karekare.jpg" },
+                    { id: 'platter-shrimp_sinigang', name: "SHRIMP SINIGANG", price: 350, rating: 4, image: "Photo/shrimp_sinigang.jpg" },
+                    { id: 'platter-pork_sinigang', name: "PORK SINIGANG", price: 380, rating: 5, image: "Photo/pork_sinigang.jpg" },
+                    { id: 'platter-hototay_soup', name: "HOTOTAY SOUP", price: 260, rating: 3, image: "Photo/hototay_soup.jpg" }
+                ]
+            },
+            {
+                category: "DESSERT",
+                items: [
+                    { id: 'dessert-halo_halo', name: "HALO HALO", price: 125, rating: 5, image: "Photo/halo_halo.jpg" },
+                    { id: 'dessert-maiz_con_leche', name: "MAIZ CON LECHE", price: 90, rating: 4, image: "Photo/maiz_con_leche.jpg" },
+                    { id: 'dessert-leche_flan', name: "LECHE FLAN", price: 145, rating: 5, image: "Photo/leche_flan.jpg" }
+                ]
+            },
+            {
+                category: "SPAGHETTI",
+                items: [
+                    { id: 'spaghetti-a', name: "S - A (w/ BUTTER BREAD)", price: 105, rating: 4, image: "Photo/spaghetti_a.jpg" },
+                    { id: 'spaghetti-b', name: "S - B (w/ SHANGHAI AND EMPANADA)", price: 165, rating: 5, image: "Photo/spaghetti_b.jpg" },
+                    { id: 'spaghetti-c', name: "S - C (w/ SHANGHAI, HAM & CHEESE SANDWICH)", price: 180, rating: 4, image: "Photo/spaghetti_c.jpg" },
+                    { id: 'spaghetti-d', name: "S - D (w/ EMPANADA AND CHICKEN)", price: 165, rating: 4, image: "Photo/spaghetti_d.jpg" },
+                    { id: 'spaghetti-e', name: "S - E (w/ CHICKEN AND FRIES)", price: 170, rating: 5, image: "Photo/spaghetti_e.jpg" },
+                    { id: 'spaghetti-f', name: "S - F (w/ SHANGHAI AND CHICKEN)", price: 180, rating: 4, image: "Photo/spaghetti_f.jpg" },
+                    { id: 'spaghetti-g', name: "S - G (w/ HAM AND CHEESE SANDWICH w/ FRIES)", price: 170, rating: 4, image: "Photo/spaghetti_g.jpg" },
+                    { id: 'spaghetti-h', name: "S - H (w/ CHICKEN, PIZZA ROLL & FRIES)", price: 185, rating: 5, image: "Photo/spaghetti_h.jpg" }
+                ]
+            },
+            {
+                category: "BILAO",
+                items: [
+                    { id: 'bilao-canton', name: "PANCIT CANTON GUISADO", price: 200, rating: 4, image: "Photo/pancit_canton.jpg" },
+                    { id: 'bilao-bihon', name: "BIHON | MIKI BIHON", price: 200, rating: 5, image: "Photo/pancit_bihon.jpg" },
+                    { id: 'bilao-sotanghon', name: "SOTANGHON | SOTANGHON w/ CANTON", price: 240, rating: 4, image: "Photo/sotanghon.jpg" },
+                    { id: 'bilao-combo', name: "SPAGHETTI | CARBONARA | PALABOK", price: 255, rating: 5, image: "Photo/bilao_combo.jpg" }
+                ]
+            }
+        ];
+
+        // --- 2. CART MANAGEMENT LOGIC ---
+        let cart = JSON.parse(localStorage.getItem('tabeyaCart')) || [];
+
+        function updateCartDisplay() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-item-count').textContent = count;
+        }
+
+        function saveCart() {
+            localStorage.setItem('tabeyaCart', JSON.stringify(cart));
+            updateCartDisplay();
+            renderCartModal();
+        }
+
+        function findItemInMenu(itemId) {
+            for (const category of menuData) {
+                const item = category.items.find(i => i.id === itemId);
+                if (item) return item;
+            }
+            return null;
+        }
+
+        function handleAddToCart(itemId) {
+            // CHECK: Prevent adding to cart if not logged in
+            if (!checkLoginAndProceed('Menu.html')) {
+                return;
+            }
+
+            const menuItem = findItemInMenu(itemId);
+            if (!menuItem) return;
+
+            const cartItem = cart.find(item => item.id === itemId);
+
+            if (cartItem) {
+                cartItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: menuItem.id,
+                    name: menuItem.name,
+                    price: menuItem.price,
+                    quantity: 1,
+                    image: menuItem.image
+                });
+            }
+
+            saveCart();
+            alert(`${menuItem.name} added to cart!`);
+        }
+
+        // Function to handle quantity change in the modal
+        function changeQuantity(itemId, delta) {
+            // Security check is technically not needed here since the modal view requires login
+            const cartItem = cart.find(item => item.id === itemId);
+            if (!cartItem) return;
+
+            cartItem.quantity += delta;
+
+            if (cartItem.quantity <= 0) {
+                // Remove item if quantity is zero or less
+                cart = cart.filter(item => item.id !== itemId);
+            }
+
+            saveCart();
+        }
+
+        // --- 3. RENDERING LOGIC (Updated for Add to Cart) ---
+
+        function renderStars(rating) {
+            let starsHtml = '';
+            const maxRating = 5;
+            for (let i = 0; i < rating; i++) {
+                starsHtml += '<span class="star full">★</span>';
+            }
+            for (let i = rating; i < maxRating; i++) {
+                starsHtml += '<span class="star empty">☆</span>';
+            }
+            return starsHtml;
+        }
+
+        function renderMenu() {
+            const container = document.getElementById('dynamic-menu-content');
+            let menuHtml = '';
+
+            menuData.forEach(category => {
+                menuHtml += `
+                    <div class="menu-category">
+                        <h3>${category.category}</h3>
+                        <div class="menu-grid2"> `;
+
+                category.items.forEach((item, index) => {
+                    const itemId = item.id;
+
+                    menuHtml += `
+                        <div class="menu-item2">
+                            <div class="item-image-container">
+                                <img src="${item.image}" alt="${item.name}" class="item-image">
+                            </div>
+                            <div class="item-details-container">
+                                <div class="item-info2">
+                                    <span class="item-name">${item.name}</span>
+                                    <span class="item-price">₱${item.price}</span>
+                                </div>
+                                <a href="#" class="rating-trigger" data-item-id="${itemId}">
+                                    <div class="star-rating">
+                                        ${renderStars(item.rating)}
+                                    </div>
+                                </a>
+                                <button class="add-to-cart-btn" data-item-id="${itemId}">Add to Cart</button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                menuHtml += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = menuHtml;
+            attachMenuListeners();
+        }
+
+        function attachMenuListeners() {
+            // Attach rating listeners 
+            const ratingTriggers = document.querySelectorAll('.rating-trigger');
+            ratingTriggers.forEach(trigger => {
+                trigger.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    
+                    // Secure rating trigger
+                    if (!checkUserLoginStatus()) {
+                        const itemId = this.getAttribute('data-item-id');
+                        localStorage.setItem('redirectAfterLogin', 'Menu.html');
+                        localStorage.setItem('itemToRate', itemId);
+                        window.location.href = LOGIN_PAGE;
+                        return;
+                    }
+                    
+                    // NOTE: Add actual rating logic here once secured...
+                    alert('Rating feature would open here (Logged In)');
+                });
+            });
+
+            // Attach 'Add to Cart' listeners to the secure handler
+            const cartButtons = document.querySelectorAll('.add-to-cart-btn');
+            cartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = this.getAttribute('data-item-id');
+                    handleAddToCart(itemId); // Call the secure handler
+                });
+            });
+
+            // Secure the Cater Reservation link
+            document.getElementById('cater-reservation-link').addEventListener('click', function(event) {
+                event.preventDefault(); // Stop default navigation
+                if (checkLoginAndProceed(CATER_RESERVATION_PAGE)) {
+                    // If checkLoginAndProceed returns true (user is logged in)
+                    window.location.href = CATER_RESERVATION_PAGE;
+                }
+            });
+
+
+            // Secure the View Cart (Modal) Button
+            const modal = document.getElementById('cart-modal');
+            const btn = document.getElementById('view-cart-btn');
+            const span = document.getElementsByClassName('close-btn')[0];
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            btn.onclick = function() {
+                if (checkLoginAndProceed('Menu.html')) {
+                    renderCartModal();
+                    modal.style.display = "block";
+                }
+            }
+
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            // Secure the Checkout button inside the modal
+            checkoutBtn.onclick = function() {
+                if (!checkLoginAndProceed('Menu.html')) {
+                    return;
+                }
+
+                if (cart.length > 0) {
+                    alert("Proceeding to checkout! (This is where you would link to Checkout.html)");
+                    modal.style.display = "none";
+                } else {
+                    alert("Your cart is empty!");
+                }
+            }
+        }
+
+        function renderCartModal() {
+            const listContainer = document.getElementById('cart-items-list');
+            const totalElement = document.getElementById('cart-total');
+            let cartHtml = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                listContainer.innerHTML = '<p style="text-align: center; color: #555;">Your cart is empty.</p>';
+                totalElement.textContent = '0.00';
+                return;
+            }
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                cartHtml += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-info">
+                            <span class="cart-item-name">${item.name}</span>
+                            <span class="cart-item-price">@ ₱${item.price.toFixed(2)}</span>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button onclick="changeQuantity('${item.id}', -1)">-</button>
+                            <span class="cart-item-qty">${item.quantity}</span>
+                            <button onclick="changeQuantity('${item.id}', 1)">+</button>
+                        </div>
+                        <span class="cart-item-subtotal">₱${itemTotal.toFixed(2)}</span>
+                    </div>
+                `;
+            });
+
+            listContainer.innerHTML = cartHtml;
+            totalElement.textContent = total.toFixed(2);
+        }
+        
+        // --- Header Link Dynamic Update (Copied from your Login.html for consistency) ---
+        function updateAccountLink() {
+            const accountLink = document.getElementById('account-link');
+            if (!accountLink) return;
+
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+
+            accountLink.onclick = null; 
+
+            if (user) {
+                // LOGGED IN STATE: Show name, make it behave like a logout button
+                accountLink.textContent = user.name.split(' ')[0].toUpperCase();
+                accountLink.href = '#'; 
+                accountLink.classList.remove('active'); 
+                
+                accountLink.onclick = (e) => {
+                    e.preventDefault();
+                    if (confirm(`Are you sure you want to log out, ${user.name.split(' ')[0]}?`)) {
+                        // Minimal logout logic needed on this page
+                        localStorage.removeItem('currentUser');
+                        localStorage.removeItem('redirectAfterLogin'); 
+                        window.location.reload(); // Refresh the page to update the header
+                    }
+                };
+            } else {
+                // LOGGED OUT STATE: Show PROFILE, link is for login page
+                accountLink.textContent = 'PROFILE';
+                accountLink.href = 'Login.html';
+                accountLink.classList.remove('active'); 
+            }
+        }
+
+        // --- 4. INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMenu();
+            updateCartDisplay(); // Load cart count on page load
+            updateAccountLink(); // Update the header link based on login status
+        });
+    </script>
+</body>
+</html>
